@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Gym 企業特約合作計畫</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 全域設定 */
+        :root { --primary-red: #E3000F; --dark-bg: #121212; --section-bg-alt: #1E1E1E; --text-light: #F3F4F6; --text-muted: #9CA3AF; }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { margin: 0; padding: 0; font-family: 'Noto Sans TC', sans-serif; background-color: var(--dark-bg); color: var(--text-light); line-height: 1.6; position: relative; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* 導覽列 */
+        header { background-color: rgba(18, 18, 18, 0.95); position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid #333; backdrop-filter: blur(5px); }
+        .navbar { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+        .logo { font-size: 24px; font-weight: 900; color: white; text-decoration: none; letter-spacing: 1px; }
+        .logo span { color: var(--primary-red); }
+        .btn-primary { background-color: var(--primary-red); color: white; padding: 10px 24px; border-radius: 30px; text-decoration: none; font-weight: bold; transition: background-color 0.3s; cursor: pointer; display: inline-block; border: none; font-size: 16px; }
+        .btn-primary:hover { background-color: #B3000C; }
+
+        /* 區塊共用設定 */
+        section { padding: 100px 0; }
+        .section-title { text-align: center; font-size: 36px; font-weight: 900; margin-bottom: 60px; }
+        .section-title span { color: var(--primary-red); }
+        .section-subtitle { text-align: center; color: var(--text-muted); font-size: 18px; margin-top: -40px; margin-bottom: 60px; }
+
+        /* 首圖區 */
+        .hero { height: 90vh; min-height: 600px; display: flex; align-items: center; text-align: center; background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop') center/cover; padding-top: 70px; }
+        .hero h1 { font-size: 56px; font-weight: 900; margin-bottom: 20px; line-height: 1.2; }
+        .hero p { font-size: 20px; color: var(--text-muted); margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto; }
+
+        /* 信任背書區塊 */
+        .trust-section { background-color: #000; padding: 60px 0; text-align: center; border-bottom: 1px solid #333; }
+        .trust-section h2 { font-size: 24px; color: var(--text-muted); margin-bottom: 40px; font-weight: normal; }
+        .logo-wall { display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; margin-bottom: 50px; opacity: 0.7; }
+        .logo-item { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: bold; color: white; }
+        .logo-item i { font-size: 30px; color: var(--text-muted); }
+        .testimonial-box { background-color: var(--section-bg-alt); max-width: 800px; margin: 0 auto; padding: 40px; border-radius: 12px; border-left: 5px solid var(--primary-red); text-align: left; position: relative; }
+        .testimonial-box::before { content: "\f10d"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; top: 20px; left: 20px; font-size: 40px; color: rgba(255,255,255,0.05); }
+        .testimonial-text { font-size: 18px; font-style: italic; margin-bottom: 20px; line-height: 1.8; position: relative; z-index: 1; }
+
+        /* 企業好處區塊 */
+        .benefits-bg { background-color: var(--section-bg-alt); }
+        .feature-row { display: flex; align-items: center; gap: 60px; margin-bottom: 100px; }
+        .feature-row:last-child { margin-bottom: 0; }
+        .feature-row:nth-child(even) { flex-direction: row-reverse; }
+        .feature-img { flex: 1; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); height: 350px; }
+        .feature-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
+        .feature-img:hover img { transform: scale(1.05); }
+        .feature-text { flex: 1; }
+        .feature-text h3 { font-size: 32px; margin-top: 0; margin-bottom: 20px; color: white; display: flex; align-items: center; gap: 15px; }
+        .feature-text p { font-size: 18px; color: var(--text-muted); line-height: 1.8; margin-bottom: 20px; }
+        .highlight-data { background-color: rgba(227, 0, 15, 0.1); border-left: 4px solid var(--primary-red); padding: 15px 20px; border-radius: 0 8px 8px 0; font-weight: bold; color: white; font-size: 18px; }
+        .count-up { color: var(--primary-red); font-size: 24px; font-weight: 900; }
+
+        /* 場館展示 (Gallery) */
+        .gallery-section { padding-top: 40px; padding-bottom: 80px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .gallery-item { border-radius: 12px; overflow: hidden; position: relative; height: 250px; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.9)); padding: 20px; color: white; font-weight: bold; font-size: 18px; }
+
+        /* 方案對比 */
+        .plans-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; align-items: stretch; }
+        .plan-card { background-color: var(--section-bg-alt); border-radius: 16px; padding: 50px; border: 2px solid #333; position: relative; display: flex; flex-direction: column; }
+        .plan-card.premium { border-color: var(--primary-red); box-shadow: 0 10px 30px rgba(227, 0, 15, 0.15); }
+        .plan-badge { position: absolute; top: -15px; right: 30px; background: var(--primary-red); color: white; padding: 5px 15px; border-radius: 20px; font-size: 14px; font-weight: bold; }
+        .plan-card h3 { font-size: 32px; margin-top: 0; margin-bottom: 10px; }
+        .plan-card .price { font-size: 18px; color: var(--text-muted); margin-bottom: 30px; padding-bottom: 30px; border-bottom: 1px solid #333; }
+        .plan-list { list-style: none; padding: 0; margin: 0 0 40px 0; flex-grow: 1; }
+        .plan-list li { margin-bottom: 15px; display: flex; align-items: flex-start; font-size: 17px; }
+        .plan-list li i { color: var(--primary-red); margin-top: 5px; margin-right: 15px; }
+        .plan-list li span.highlight { color: #FFD700; font-size: 14px; display: block; margin-top: 5px; }
+        .plan-btn-wrapper { margin-top: auto; text-align: center; }
+        .plan-btn-wrapper a { display: block; }
+
+        /* 保證回饋階梯圖 */
+        .investment-section { background-color: var(--dark-bg); }
+        .investment-tiers { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+        .tier-row { display: flex; background-color: var(--section-bg-alt); border: 1px solid #333; border-radius: 12px; overflow: hidden; align-items: stretch; transition: transform 0.3s, border-color 0.3s; }
+        .tier-row:hover { transform: translateY(-5px); border-color: var(--primary-red); }
+        .tier-scale { background-color: #222; padding: 25px 20px; width: 180px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; color: white; border-right: 1px solid #333; flex-shrink: 0; text-align: center; }
+        .tier-invest { padding: 25px 30px; width: 220px; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid #333; flex-shrink: 0; }
+        .tier-invest span { font-size: 14px; color: var(--text-muted); margin-bottom: 5px; }
+        .tier-invest strong { font-size: 28px; color: var(--primary-red); line-height: 1; }
+        .tier-reward { padding: 25px 30px; flex-grow: 1; display: flex; align-items: center; font-size: 18px; font-weight: bold; background: linear-gradient(90deg, rgba(227,0,15,0.05), transparent); line-height: 1.5; }
+        .tier-reward i { color: #FFD700; font-size: 28px; margin-right: 20px; }
+
+        /* 全台據點優勢 */
+        .locations-section { background-color: #000; border-top: 1px solid #333; }
+        .loc-flex { display: flex; align-items: center; gap: 60px; }
+        .loc-text { flex: 1; }
+        .loc-text h2 { font-size: 36px; margin-bottom: 20px; }
+        .loc-text h2 span { color: var(--primary-red); }
+        .loc-features { list-style: none; padding: 0; margin-top: 30px; }
+        .loc-features li { display: flex; align-items: center; gap: 15px; font-size: 20px; margin-bottom: 20px; background-color: var(--section-bg-alt); padding: 15px 20px; border-radius: 8px; border-left: 4px solid var(--primary-red); }
+        .loc-features i { font-size: 24px; color: var(--primary-red); }
+        .loc-map { flex: 1; text-align: center; }
+        .loc-map img { max-width: 100%; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid #333; }
+
+        /* 合作流程 */
+        .process-section { background-color: #000; border-top: 1px solid #333; border-bottom: 1px solid #333; }
+        .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; position: relative; }
+        .process-grid::before { content: ''; position: absolute; top: 40px; left: 10%; right: 10%; height: 2px; background-color: #333; z-index: 0; }
+        .process-step { text-align: center; position: relative; z-index: 1; }
+        .step-icon { width: 80px; height: 80px; background-color: var(--dark-bg); border: 2px solid var(--primary-red); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; color: var(--primary-red); margin: 0 auto 20px auto; box-shadow: 0 0 15px rgba(227, 0, 15, 0.3); }
+        .process-step h4 { font-size: 20px; margin-bottom: 10px; color: white; }
+        .process-step p { color: var(--text-muted); font-size: 15px; }
+
+        /* FAQ 區塊 */
+        .faq-section { background-color: var(--section-bg-alt); }
+        .faq-grid { display: flex; gap: 30px; max-width: 1000px; margin: 0 auto; align-items: flex-start; }
+        .faq-col { flex: 1; display: flex; flex-direction: column; gap: 15px; }
+        .faq-item { background-color: var(--dark-bg); border: 1px solid #333; border-radius: 8px; overflow: hidden; }
+        .faq-btn { width: 100%; background: none; border: none; padding: 20px; text-align: left; font-size: 18px; font-weight: bold; color: white; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: inherit; transition: background-color 0.3s; }
+        .faq-btn:hover { background-color: #1a1a1a; }
+        .faq-btn i { color: var(--primary-red); transition: transform 0.3s; font-size: 14px; }
+        .faq-btn.active i { transform: rotate(180deg); }
+        .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: #151515; }
+        .faq-content p { padding: 0 20px 20px 20px; margin: 0; color: var(--text-muted); font-size: 15px; line-height: 1.7; }
+
+        /* 底部聯絡表單 */
+        .contact-section { background: linear-gradient(rgba(18,18,18,0.9), rgba(18,18,18,0.9)), url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2070&auto=format&fit=crop') center/cover; padding: 100px 0; }
+        .form-container { background-color: var(--section-bg-alt); max-width: 700px; margin: 0 auto; padding: 50px; border-radius: 16px; border: 1px solid #333; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--text-light); }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 15px; background-color: var(--dark-bg); border: 1px solid #444; border-radius: 8px; color: white; font-family: inherit; font-size: 16px; transition: border-color 0.3s; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary-red); }
+        .form-row { display: flex; gap: 20px; }
+        .form-row .form-group { flex: 1; }
+        .submit-btn { width: 100%; padding: 18px; font-size: 20px; letter-spacing: 2px; border-radius: 8px; margin-top: 10px; }
+
+        /* 頁尾 */
+        footer { background-color: #000; padding: 60px 0 30px 0; border-top: 2px solid var(--primary-red); }
+        .footer-grid { display: flex; justify-content: space-between; margin-bottom: 40px; }
+        .footer-col h4 { font-size: 20px; color: white; margin-bottom: 20px; }
+        .footer-col p, .footer-col a { color: var(--text-muted); font-size: 15px; text-decoration: none; display: block; margin-bottom: 10px; }
+        .footer-col a:hover { color: var(--primary-red); }
+        .footer-bottom { text-align: center; color: #555; font-size: 14px; border-top: 1px solid #222; padding-top: 30px; }
+
+        /* 懸浮聯絡按鈕 */
+        .sticky-cta { position: fixed; bottom: -100px; right: 30px; background-color: var(--primary-red); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 24px; box-shadow: 0 5px 20px rgba(227, 0, 15, 0.5); z-index: 999; transition: bottom 0.5s ease-in-out, transform 0.3s; text-decoration: none; }
+        .sticky-cta.visible { bottom: 30px; }
+        .sticky-cta:hover { transform: scale(1.1); background-color: #B3000C; }
+
+        /* 響應式 */
+        @media (max-width: 900px) {
+            .feature-row, .feature-row:nth-child(even), .loc-flex, .form-row, .footer-grid { flex-direction: column; gap: 30px; margin-bottom: 60px; }
+            .hero h1 { font-size: 36px; }
+            .gallery-grid, .process-grid { grid-template-columns: 1fr; }
+            .process-grid::before { display: none; }
+            .tier-row { flex-direction: column; }
+            .tier-scale, .tier-invest { width: 100%; border-right: none; border-bottom: 1px solid #333; text-align: left; align-items: flex-start; padding: 20px; }
+            .faq-grid { flex-direction: column; gap: 15px; }
+            .form-container { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo">WORLD GYM <span>企業特約</span></a>
+            <a href="#contactForm" class="btn-primary">線上申請</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>打造最強健康職場<br>從<span>員工健康</span>開始</h1>
+            <p>加入 World Gym 企業特約，有效提升員工向心力、降低流動率，輕鬆打造專屬企業的健康福利，為您的公司注入滿滿活力！</p>
+            <a href="#plans" class="btn-primary" style="font-size: 18px; padding: 15px 40px;">查看特約方案</a>
+        </div>
+    </section>
+
+    <section class="trust-section">
+        <div class="container">
+            <h2>深受全台超過 500 家上市櫃與知名企業信賴</h2>
+            <div class="logo-wall">
+                <div class="logo-item"><i class="fa-solid fa-microchip"></i> 科技半導體業</div>
+                <div class="logo-item"><i class="fa-solid fa-building-columns"></i> 金融壽險業</div>
+                <div class="logo-item"><i class="fa-solid fa-industry"></i> 傳產製造業</div>
+                <div class="logo-item"><i class="fa-solid fa-store"></i> 連鎖零售業</div>
+            </div>
+            <div class="testimonial-box">
+                <div class="testimonial-text">
+                    「自從引進 World Gym 企業特約後，我們發現員工在下班後的交流變多了。更重要的是，年度健檢紅字比例下降，員工請病假的天數也顯著減少。這筆健康投資的報酬率，遠超乎我們經營團隊的預期。」
+                </div>
+                <div class="testimonial-author">張總監 (HR Director)</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits-bg" id="benefits">
+        <div class="container">
+            <h2 class="section-title">為什麼企業需要鼓勵<span>員工健身？</span></h2>
+            
+            <div class="feature-row">
+                <div class="feature-img"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=2070&auto=format&fit=crop" alt="提升工作效率"></div>
+                <div class="feature-text">
+                    <h3><i class="fa-solid fa-bolt"></i> 提升工作效率與專注力</h3>
+                    <p>科學研究證實，規律運動能促進腦內啡分泌，有效釋放高壓的職場壓力。當員工擁有健康的體魄與良好的心情，在處理公務時將展現出更高的專注力與決策品質。</p>
+                    <div class="highlight-data">💡 提供完善健康福利，員工生產力平均提升 <span class="count-up" data-target="15">0</span>%</div>
+                </div>
+            </div>
+
+            <div class="feature-row">
+                <div class="feature-img"><img src="https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=2070&auto=format&fit=crop" alt="強化雇主品牌"></div>
+                <div class="feature-text">
+                    <h3><i class="fa-solid fa-users"></i> 強化雇主品牌，推展 ESG</h3>
+                    <p>在重視生活品質的現代，優質的「健康福利」是企業招募與留住關鍵人才的絕對優勢。帶領員工落實職場健康，更能具體實踐企業 ESG 社會責任（S - Social）。</p>
+                    <div class="highlight-data">💡 重視員工健康的企業，年度人才離職率降低達 <span class="count-up" data-target="25">0</span>%</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section" style="background-color: var(--dark-bg);">
+        <div class="container">
+            <h2 class="section-title">國際級運動設施 <span>全方位滿足</span></h2>
+            <div class="section-subtitle">不管員工喜歡重訓、有氧還是游泳，這裡應有盡有</div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop" alt="重訓器材">
+                    <div class="gallery-overlay">頂尖重訓器材區</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800&auto=format&fit=crop" alt="團體有氧課程">
+                    <div class="gallery-overlay">百堂團體有氧課程</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1600965962361-9035dbfd1c50?q=80&w=800&auto=format&fit=crop" alt="游泳池與SPA">
+                    <div class="gallery-overlay">室內溫水泳池 & SPA</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="plans" class="benefits-bg">
+        <div class="container">
+            <h2 class="section-title">選擇最適合您的<span>特約方案</span></h2>
+            <div class="plans-container">
+                <div class="plan-card">
+                    <h3>免費特約方案</h3>
+                    <div class="price">零成本升級福利，線上快速簽署</div>
+                    <ul class="plan-list">
+                        <li><i class="fa-solid fa-check"></i> <div>21 天單館體驗 (限非會員)</div></li>
+                        <li><i class="fa-solid fa-check"></i> <div>InBody 身體組成檢測 1 次</div></li>
+                        <li><i class="fa-solid fa-check"></i> <div>入會免收「入會費」</div></li>
+                        <li><i class="fa-solid fa-check"></i> <div>入會贈一對一教練課 1 堂</div></li>
+                        <li><i class="fa-solid fa-check"></i> <div>線上簽約，人資快速佈達</div></li>
+                    </ul>
+                    <div class="plan-btn-wrapper">
+                        <a href="#contactForm" class="btn-primary" style="background-color: #333;">填寫免費方案需求</a>
+                    </div>
+                </div>
+
+                <div class="plan-card premium">
+                    <div class="plan-badge">尊榮推薦 / 完美解套</div>
+                    <h3>付費特約方案</h3>
+                    <div class="price">客製化健康照護，現有會員同享福利</div>
+                    <ul class="plan-list">
+                        <li><i class="fa-solid fa-check"></i> <div>1 個月「市區型」跨館體驗 (限非會員)</div></li>
+                        <li><i class="fa-solid fa-check"></i> <div>員工於體驗期間內決議入會，即享「免入會費及免手續費」雙重優惠</div></li>
+                        <li><i class="fa-solid fa-dumbbell"></i> <div>專屬教練課優惠：單堂 $1,488 元<br><span style="font-size: 14px; color: var(--text-muted);">(最多購買 12 堂，每人限購一組，限 WG 具籍會員購買)</span></div></li>
+                        <li><i class="fa-solid fa-gift"></i> <div>贈送 World Gym 零售商品 9 折券 & 100 元餐飲折抵券</div></li>
+                        <li><i class="fa-solid fa-trophy"></i> <div>協辦企業專屬「健康挑戰賽」<br><span class="highlight">*現有會員員工亦可報名同樂</span></div></li>
+                        <li><i class="fa-solid fa-star" style="color: #FFD700;"></i> <div>企業尊榮加碼禮：依員工規模與投資金額，額外獲贈多組「免費會籍 + 教練課」</div></li>
+                    </ul>
+                    <div class="plan-btn-wrapper">
+                        <a href="#contactForm" class="btn-primary">預約專屬顧問諮詢</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="investment-section">
+        <div class="container">
+            <h2 class="section-title">付費特約 <span>保證回饋方案</span></h2>
+            <p style="text-align: center; margin-bottom: 50px; color: var(--text-muted); font-size: 18px;">
+                根據您的企業規模與投資金額，我們將提供對應的高價值實質回饋。<br>回饋之會籍與課程可作為企業內部抽獎或績效獎勵。
+            </p>
+            <div class="investment-tiers">
+                <div class="tier-row">
+                    <div class="tier-scale">1 - 50 人</div>
+                    <div class="tier-invest"><span>企業投資金額</span><strong>$20,000</strong></div>
+                    <div class="tier-reward"><i class="fa-solid fa-gift"></i><div>保證回饋：<span style="color: white;">半年會籍 + 1堂教練課</span>（共 1 組）</div></div>
+                </div>
+                <div class="tier-row">
+                    <div class="tier-scale">51 - 100 人</div>
+                    <div class="tier-invest"><span>企業投資金額</span><strong>$50,000</strong></div>
+                    <div class="tier-reward"><i class="fa-solid fa-gift"></i><div>保證回饋：<span style="color: white;">半年會籍 + 1堂教練課</span>（共 3 組）</div></div>
+                </div>
+                <div class="tier-row">
+                    <div class="tier-scale">101 - 500 人</div>
+                    <div class="tier-invest"><span>企業投資金額</span><strong>$80,000</strong></div>
+                    <div class="tier-reward"><i class="fa-solid fa-gift"></i><div>保證回饋：<span style="color: white;">半年會籍 + 1堂教練課</span>（共 5 組）</div></div>
+                </div>
+                <div class="tier-row" style="border-color: #A1000B;">
+                    <div class="tier-scale" style="background-color: #3d0004;">501 人以上</div>
+                    <div class="tier-invest"><span>企業投資金額</span><strong>$120,000</strong></div>
+                    <div class="tier-reward"><i class="fa-solid fa-crown" style="color: #FFD700;"></i><div>保證回饋：<span style="color: white; font-weight: 900;">一年會籍 + 1堂教練課</span>（共 5 組）</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="locations-section">
+        <div class="container loc-flex">
+            <div class="loc-text">
+                <h2>全台 <span>130+</span> 間俱樂部<br>讓運動融入生活日常</h2>
+                <p style="font-size: 18px; color: var(--text-muted); line-height: 1.8;">我們深知員工下班後不想跑太遠。選擇全台據點最多的 World Gym，無論員工總部在哪、住在哪裡，都能輕鬆享受這項福利。</p>
+                <ul class="loc-features">
+                    <li><i class="fa-solid fa-location-dot"></i> 全台市佔第一，分佈最廣的連鎖品牌</li>
+                    <li><i class="fa-solid fa-clock"></i> 清晨至深夜長時營業，配合各班別需求</li>
+                    <li><i class="fa-solid fa-train-subway"></i> 多位於市區交通樞紐或捷運站周邊</li>
+                </ul>
+            </div>
+            <div class="loc-map">
+                <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=1000&auto=format&fit=crop" alt="全台據點">
+            </div>
+        </div>
+    </section>
+
+    <section class="process-section">
+        <div class="container">
+            <h2 class="section-title">申請流程 <span>簡單快速</span></h2>
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-icon"><i class="fa-solid fa-desktop"></i></div>
+                    <h4>1. 線上填寫需求</h4>
+                    <p>填寫網頁下方表單，選擇您感興趣的特約方案。</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-icon"><i class="fa-solid fa-headset"></i></div>
+                    <h4>2. 專員快速接洽</h4>
+                    <p>免費版系統自動發送合約；付費版由顧問親自致電為您規劃。</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-icon"><i class="fa-solid fa-file-signature"></i></div>
+                    <h4>3. 確認與簽約</h4>
+                    <p>確認福利細節，完成線上或紙本簽署作業。</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-icon"><i class="fa-solid fa-bullhorn"></i></div>
+                    <h4>4. 專屬連結佈達</h4>
+                    <p>獲取貴公司專屬的「員工登記連結」，即可對內公告福利！</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">企業特約 <span>常見問題解答</span></h2>
+            <div class="faq-grid">
+                <div class="faq-col">
+                    <div class="faq-item">
+                        <button class="faq-btn">免費與付費特約的體驗有何不同？ <i class="fa-solid fa-chevron-down"></i></button>
+                        <div class="faq-content"><p>免費特約為指定單一廠館 21 天體驗；付費特約升級為「市區型」體驗 1 個月，讓跨區通勤員工享受更彈性的跨館運動便利性。</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-btn">已經是會員的員工能享福利嗎？ <i class="fa-solid fa-chevron-down"></i></button>
+                        <div class="faq-content"><p>當然可以！付費特約中，現有會員可獲得商品折扣與餐飲券，並能一同參與健康挑戰賽。抽中回饋會籍亦可展延使用。</p></div>
+                    </div>
+                </div>
+                <div class="faq-col">
+                    <div class="faq-item">
+                        <button class="faq-btn">保證回饋的贈品會如何發放？ <i class="fa-solid fa-chevron-down"></i></button>
+                        <div class="faq-content"><p>我們將以「實體兌換券」或「專屬電子序號」核發給企業窗口，HR 可自由運用於尾牙抽獎、競賽獎品或績效獎勵。</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-btn">免費方案的合約簽署需要多久？ <i class="fa-solid fa-chevron-down"></i></button>
+                        <div class="faq-content"><p>填寫需求後系統會自動發送電子合約。HR 線上回簽後，最快 1 個工作天內即可獲得員工登記連結，快速佈達。</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contactForm">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">準備好為員工升級福利了嗎？</h2>
+            <div class="section-subtitle" style="color: #ddd;">花 1 分鐘留下資訊，讓我們為您打造企業專屬健康計畫。</div>
+            
+            <div class="form-container">
+                <form id="b2bForm" onsubmit="event.preventDefault(); alert('感謝您的填寫！專員將盡快與您聯繫或發送線上合約。');">
+                    <div class="form-group">
+                        <label>企業 / 公司名稱 *</label>
+                        <input type="text" placeholder="請輸入公司完整名稱" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>聯絡人姓名 *</label>
+                            <input type="text" placeholder="例：王小明" required>
+                        </div>
+                        <div class="form-group">
+                            <label>職稱</label>
+                            <input type="text" placeholder="例：人資經理 / 福委">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>聯絡電話 / 手機 *</label>
+                            <input type="tel" placeholder="09xx-xxx-xxx 或 公司分機" required>
+                        </div>
+                        <div class="form-group">
+                            <label>企業 Email *</label>
+                            <input type="email" placeholder="example@company.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>企業預估規模 *</label>
+                            <select required>
+                                <option value="" disabled selected>請選擇員工人數</option>
+                                <option value="1-50">1 - 50 人</option>
+                                <option value="51-100">51 - 100 人</option>
+                                <option value="101-500">101 - 500 人</option>
+                                <option value="501+">501 人以上</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>感興趣的方案 *</label>
+                            <select required>
+                                <option value="" disabled selected>請選擇合作方案</option>
+                                <option value="free">免費特約方案 (系統自動發送合約)</option>
+                                <option value="premium">付費特約方案 (專員致電為您規劃)</option>
+                                <option value="other">其他異業合作 (場地租借/講座等)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>補充說明 / 特殊需求 (選填)</label>
+                        <textarea rows="3" placeholder="若有其他合作想法或疑問，歡迎填寫於此..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary submit-btn">送出合作需求</button>
+                    <p style="text-align: center; font-size: 12px; color: #888; margin-top: 15px;">點擊送出即表示您同意我們的隱私權政策，並允許專員與您聯繫。</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col" style="flex: 2;">
+                    <h4 style="font-size: 24px; font-weight: 900; color: white;">WORLD GYM <span style="color: var(--primary-red);">企業特約</span></h4>
+                    <p>全台最大健身品牌，致力於為各大企業打造最完善的職場健康解決方案，提升員工活力，創造企業雙贏。</p>
+                </div>
+                <div class="footer-col" style="flex: 1;">
+                    <h4>聯絡專員</h4>
+                    <p><i class="fa-solid fa-phone"></i> 0800-XXX-XXX</p>
+                    <p><i class="fa-solid fa-envelope"></i> corporate@worldgym.com</p>
+                    <p><i class="fa-solid fa-building"></i> 企業特約業務部</p>
+                </div>
+                <div class="footer-col" style="flex: 1;">
+                    <h4>快速連結</h4>
+                    <a href="#benefits">了解健身好處</a>
+                    <a href="#plans">特約方案比較</a>
+                    <a href="#">隱私權政策</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 World Gym Taiwan. 本網頁為企業特約合作專案展示。
+            </div>
+        </div>
+    </footer>
+
+    <a href="#contactForm" class="sticky-cta" id="stickyCta" title="立即洽詢">
+        <i class="fa-solid fa-paper-plane"></i>
+    </a>
+
+    <script>
+        // FAQ 手風琴
+        document.querySelectorAll('.faq-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqContent = button.nextElementSibling;
+                button.classList.toggle('active');
+                if (button.classList.contains('active')) {
+                    faqContent.style.maxHeight = faqContent.scrollHeight + "px";
+                } else {
+                    faqContent.style.maxHeight = 0;
+                }
+            });
+        });
+
+        // 懸浮按鈕顯示控制
+        window.addEventListener('scroll', () => {
+            const cta = document.getElementById('stickyCta');
+            if (window.scrollY > 500) {
+                cta.classList.add('visible');
+            } else {
+                cta.classList.remove('visible');
+            }
+        });
+
+        // 數字跳動特效
+        const counters = document.querySelectorAll('.count-up');
+        const speed = 20;
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    const inc = target / speed;
+
+                    let current = 0;
+                    const updateCount = () => {
+                        current += inc;
+                        if (current < target) {
+                            counter.innerText = Math.ceil(current);
+                            requestAnimationFrame(updateCount);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                    observer.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(counter => {
+            observer.observe(counter);
+        });
+    </script>
+</body>
+</html>
