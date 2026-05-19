@@ -12,7 +12,6 @@
         /* 全域設定 */
         :root { --primary-red: #E3000F; --dark-bg: #121212; --section-bg-alt: #1E1E1E; --text-light: #F3F4F6; --text-muted: #9CA3AF; --gold: #FFD700; }
         * { box-sizing: border-box; }
-        /* 避免錨點跳轉被導覽列遮擋 */
         html { scroll-behavior: smooth; scroll-padding-top: 80px; }
         body { margin: 0; padding: 0; font-family: 'Noto Sans TC', sans-serif; background-color: var(--dark-bg); color: var(--text-light); line-height: 1.6; overflow-x: hidden; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; }
@@ -27,9 +26,9 @@
 
         /* 區塊共用設定 */
         section { padding: 100px 0; }
-        .section-title { text-align: center; font-size: 36px; font-weight: 900; margin-bottom: 60px; }
+        .section-title { text-align: center; font-size: 36px; font-weight: 900; margin-bottom: 20px; line-height: 1.4; }
         .section-title span { color: var(--primary-red); }
-        .section-subtitle { text-align: center; color: var(--text-muted); font-size: 18px; margin-top: -40px; margin-bottom: 60px; }
+        .section-subtitle { text-align: center; color: var(--text-muted); font-size: 18px; margin-bottom: 60px; margin-top: 0; }
 
         /* 首圖區 */
         .hero { height: 90vh; min-height: 600px; display: flex; align-items: center; text-align: center; background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop') center/cover; padding-top: 70px; }
@@ -60,7 +59,7 @@
         .highlight-data { background-color: rgba(227, 0, 15, 0.1); border-left: 4px solid var(--primary-red); padding: 15px 20px; border-radius: 0 8px 8px 0; font-weight: bold; color: white; font-size: 18px; }
         .count-up { color: var(--primary-red); font-size: 24px; font-weight: 900; }
 
-        /* 場館展示 (Gallery) */
+        /* 場館展示 */
         .gallery-section { padding-top: 40px; padding-bottom: 80px; background-color: var(--dark-bg); }
         .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .gallery-item { border-radius: 12px; overflow: hidden; position: relative; height: 250px; }
@@ -69,7 +68,7 @@
         .gallery-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.9)); padding: 20px; color: white; font-weight: bold; font-size: 18px; }
 
         /* =========================================
-           健康挑戰賽 (全新區塊)
+           健康挑戰賽 (60/40 科學評分優化版)
            ========================================= */
         .challenge-section { background: linear-gradient(135deg, #1a0002, #111); border-top: 2px solid var(--primary-red); border-bottom: 2px solid var(--primary-red); position: relative; overflow: hidden; }
         .challenge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
@@ -167,11 +166,11 @@
         .sticky-cta.visible { bottom: 20px; }
         .sticky-cta:hover { transform: scale(1.1); background-color: #B3000C; }
 
-        /* 響應式 */
+        /* 響應式優化 */
         @media (max-width: 900px) {
             section { padding: 60px 0; }
-            .section-title { font-size: 28px; margin-bottom: 40px; }
-            .section-subtitle { font-size: 15px; margin-bottom: 40px; margin-top: -30px; padding: 0 10px; }
+            .section-title { font-size: 28px; margin-bottom: 15px; } 
+            .section-subtitle { font-size: 15px; margin-bottom: 40px; padding: 0 10px; }
             .logo { font-size: 20px; }
             .navbar .btn-primary { padding: 8px 16px; font-size: 14px; }
             .hero { min-height: 500px; padding-top: 60px; }
@@ -283,8 +282,8 @@
 
     <section class="gallery-section">
         <div class="container">
-            <h2 class="section-title">國際級運動設施 <span>全方位滿足</span></h2>
-            <div class="section-subtitle">不管員工喜歡重訓、有氧還是舞蹈，這裡應有盡有</div>
+            <h2 class="section-title" style="color: white;">國際級運動設施 <span>全方位滿足</span></h2>
+            <div class="section-subtitle" style="color: #ddd;">不管員工喜歡重訓、有氧還是舞蹈，這裡應有盡有</div>
             <div class="gallery-grid">
                 <div class="gallery-item">
                     <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop" alt="重訓器材">
@@ -305,7 +304,7 @@
     <section class="challenge-section" id="challenge">
         <div class="container">
             <h2 class="section-title" style="color: white; margin-bottom: 20px;">付費特約獨家亮點 <br><span>企業專屬健康挑戰賽</span></h2>
-            <div class="section-subtitle" style="color: #ddd;">不只是健身，更是一場點燃全公司熱情的團隊活動！我們為您從零到有一手包辦。</div>
+            <div class="section-subtitle" style="color: #ddd;">不只是健身，更是一場點燃全公司熱情的團隊活動！我們為您從零到有一手包辦，建立最公平的評分機制。</div>
             
             <div class="challenge-grid">
                 <div class="challenge-img">
@@ -314,28 +313,28 @@
                 </div>
                 <div class="challenge-text">
                     <h3>凝聚向心力，<br><span>玩出職場好體力！</span></h3>
-                    <p style="color: var(--text-muted); font-size: 18px;">許多企業推動健康福利最怕「員工不參與」。World Gym 擁有豐富的企業賽事協辦經驗，透過遊戲化機制，讓跨部門員工在歡笑與汗水中建立革命情感！</p>
+                    <p style="color: var(--text-muted); font-size: 18px;">World Gym 擁有豐富的賽事協辦經驗，為您設計最聰明、客觀的挑戰規則。保障員工隱私的同時，讓跨部門同仁在汗水中建立革命情感！</p>
                     
                     <ul class="challenge-list">
                         <li>
-                            <div class="icon-box"><i class="fa-solid fa-clipboard-check"></i></div>
+                            <div class="icon-box"><i class="fa-solid fa-calendar-check"></i></div>
                             <div>
-                                <h4>專人企劃，HR 零負擔</h4>
-                                <p>由專屬顧問為您的企業量身設計賽制（如：減脂賽、增肌賽、打卡全勤賽），從前置宣傳到賽事追蹤，為人資省下大量行政時間。</p>
+                                <h4>黃金 2 個月，無痛養成習慣</h4>
+                                <p>設定為期兩個月的活動區間，時間長度剛好足夠看見體態變化。針對還未入會的員工，也可善用期間內的免費體驗方案共同參與，全體動起來！</p>
                             </div>
                         </li>
                         <li>
-                            <div class="icon-box"><i class="fa-solid fa-dna"></i></div>
+                            <div class="icon-box"><i class="fa-solid fa-clipboard-user"></i></div>
                             <div>
-                                <h4>InBody 數據，科學見證</h4>
-                                <p>賽事起訖皆採用高階 InBody 測量，數據化呈現「體脂下降率」或「肌肉增加量」，確保競賽公平且具體展現健康成效。</p>
+                                <h4>科學前/後測，專注「健康總評分」</h4>
+                                <p>賽事起訖採用高階 InBody 測量。為保護同仁隱私，我們不公開體重或體脂等敏感數字，而是採用客觀的「InBody 總評分」來衡量進步幅度，公平又安心。</p>
                             </div>
                         </li>
                         <li>
-                            <div class="icon-box"><i class="fa-solid fa-gift"></i></div>
+                            <div class="icon-box"><i class="fa-solid fa-scale-unbalanced"></i></div>
                             <div>
-                                <h4>結合高價值回饋作獎品</h4>
-                                <p>付費特約贈送的「免費會籍與教練課」，可直接作為挑戰賽的冠軍大獎，企業無須再額外編列高額獎品預算！</p>
+                                <h4>60% 努力 + 40% 成果的完美佔比</h4>
+                                <p>評分機制為：<b>俱樂部進場打卡佔 60% + InBody 評分進步佔 40%</b>。我們不設硬性進場門檻，只要肯流汗打卡就能拿高分，用分數自然鼓勵員工持之以恆！</p>
                             </div>
                         </li>
                     </ul>
@@ -408,7 +407,7 @@
                 <div class="tier-row" style="border-color: #A1000B;">
                     <div class="tier-scale" style="background-color: #3d0004;">501 人以上</div>
                     <div class="tier-invest"><span>企業投資金額</span><strong>$120,000</strong></div>
-                    <div class="tier-reward"><i class="fa-solid fa-crown" style="color: var(--gold);"></i><div>保證回饋：<span style="color: white; font-weight: 900;">一年會籍 + 1堂教練課</span><br>（共 5 組）</div></div>
+                    <div class="tier-reward"><i class="fa-solid fa-crown" style="color: #FFD700;"></i><div>保證回饋：<span style="color: white; font-weight: 900;">一年會籍 + 1堂教練課</span><br>（共 5 組）</div></div>
                 </div>
             </div>
         </div>
@@ -525,7 +524,7 @@
                         <div class="form-group">
                             <label>企業預估規模 *</label>
                             <select required>
-                                <option value="" disabled selected>請選擇員ூழ人數</option>
+                                <option value="" disabled selected>請選擇員工人數</option>
                                 <option value="1-50">1 - 50 人</option>
                                 <option value="51-100">51 - 100 人</option>
                                 <option value="101-500">101 - 500 人</option>
