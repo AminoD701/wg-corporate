@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* 全域設定 */
-        :root { --primary-red: #E3000F; --dark-bg: #121212; --section-bg-alt: #1E1E1E; --text-light: #F3F4F6; --text-muted: #9CA3AF; }
+        :root { --primary-red: #E3000F; --dark-bg: #121212; --section-bg-alt: #1E1E1E; --text-light: #F3F4F6; --text-muted: #9CA3AF; --gold: #FFD700; }
         * { box-sizing: border-box; }
         /* 避免錨點跳轉被導覽列遮擋 */
         html { scroll-behavior: smooth; scroll-padding-top: 80px; }
@@ -68,6 +68,22 @@
         .gallery-item:hover img { transform: scale(1.1); }
         .gallery-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(transparent, rgba(0,0,0,0.9)); padding: 20px; color: white; font-weight: bold; font-size: 18px; }
 
+        /* =========================================
+           健康挑戰賽 (全新區塊)
+           ========================================= */
+        .challenge-section { background: linear-gradient(135deg, #1a0002, #111); border-top: 2px solid var(--primary-red); border-bottom: 2px solid var(--primary-red); position: relative; overflow: hidden; }
+        .challenge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .challenge-text h3 { font-size: 32px; color: white; margin-bottom: 20px; line-height: 1.4; }
+        .challenge-text h3 span { color: var(--gold); }
+        .challenge-list { list-style: none; padding: 0; margin-top: 30px; }
+        .challenge-list li { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 30px; }
+        .challenge-list .icon-box { background-color: rgba(227, 0, 15, 0.1); border: 1px solid var(--primary-red); width: 60px; height: 60px; border-radius: 12px; display: flex; justify-content: center; align-items: center; font-size: 26px; color: var(--primary-red); flex-shrink: 0; }
+        .challenge-list h4 { margin: 0 0 8px 0; font-size: 20px; color: white; }
+        .challenge-list p { margin: 0; color: var(--text-muted); font-size: 16px; line-height: 1.6; }
+        .challenge-img { border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); overflow: hidden; position: relative; border: 2px solid #333; }
+        .challenge-img img { width: 100%; display: block; }
+        .challenge-badge { position: absolute; top: 20px; left: 20px; background-color: var(--primary-red); color: white; padding: 8px 20px; font-weight: bold; border-radius: 30px; font-size: 15px; letter-spacing: 1px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+
         /* 方案對比 */
         .plans-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: stretch; }
         .plan-card { background-color: var(--section-bg-alt); border-radius: 16px; padding: 50px; border: 2px solid #333; position: relative; display: flex; flex-direction: column; }
@@ -78,7 +94,7 @@
         .plan-list { list-style: none; padding: 0; margin: 0 0 40px 0; flex-grow: 1; }
         .plan-list li { margin-bottom: 15px; display: flex; align-items: flex-start; font-size: 17px; }
         .plan-list li i { color: var(--primary-red); margin-top: 5px; margin-right: 15px; flex-shrink: 0; }
-        .plan-list li span.highlight { color: #FFD700; font-size: 14px; display: block; margin-top: 5px; }
+        .plan-list li span.highlight { color: var(--gold); font-size: 14px; display: block; margin-top: 5px; }
         .plan-btn-wrapper { margin-top: auto; text-align: center; }
         .plan-btn-wrapper a { display: block; width: 100%; }
 
@@ -92,7 +108,7 @@
         .tier-invest span { font-size: 14px; color: var(--text-muted); margin-bottom: 5px; }
         .tier-invest strong { font-size: 28px; color: var(--primary-red); line-height: 1; }
         .tier-reward { padding: 25px 30px; flex-grow: 1; display: flex; align-items: center; font-size: 18px; font-weight: bold; background: linear-gradient(90deg, rgba(227,0,15,0.05), transparent); line-height: 1.5; }
-        .tier-reward i { color: #FFD700; font-size: 28px; margin-right: 20px; flex-shrink: 0; }
+        .tier-reward i { color: var(--gold); font-size: 28px; margin-right: 20px; flex-shrink: 0; }
 
         /* 全台據點優勢 */
         .locations-section { background-color: #000; border-top: 1px solid #333; }
@@ -132,7 +148,6 @@
         .form-container { background-color: var(--section-bg-alt); max-width: 700px; margin: 0 auto; padding: 50px; border-radius: 16px; border: 1px solid #333; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: var(--text-light); font-size: 15px; }
-        /* 輸入框字體設定 16px 防止 iOS Safari 自動放大畫面 */
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 15px; background-color: var(--dark-bg); border: 1px solid #444; border-radius: 8px; color: white; font-family: inherit; font-size: 16px; transition: border-color 0.3s; }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--primary-red); }
         .form-row { display: flex; gap: 20px; }
@@ -152,50 +167,34 @@
         .sticky-cta.visible { bottom: 20px; }
         .sticky-cta:hover { transform: scale(1.1); background-color: #B3000C; }
 
-        /* =========================================
-           手機版 / 平板版 響應式優化 (RWD)
-           ========================================= */
+        /* 響應式 */
         @media (max-width: 900px) {
-            /* 全局間距縮減，避免滑動過長 */
             section { padding: 60px 0; }
             .section-title { font-size: 28px; margin-bottom: 40px; }
             .section-subtitle { font-size: 15px; margin-bottom: 40px; margin-top: -30px; padding: 0 10px; }
-
-            /* 導覽列 */
             .logo { font-size: 20px; }
             .navbar .btn-primary { padding: 8px 16px; font-size: 14px; }
-
-            /* 首圖縮小字體 */
             .hero { min-height: 500px; padding-top: 60px; }
             .hero h1 { font-size: 36px; }
             .hero p { font-size: 16px; padding: 0 15px; }
-
-            /* 信任背書 */
             .trust-section { padding: 40px 0; }
             .trust-section h2 { font-size: 20px; }
             .logo-wall { gap: 20px; }
             .logo-item { font-size: 16px; }
             .logo-item i { font-size: 24px; }
             .testimonial-box { padding: 30px 20px; }
-
-            /* 企業好處 (垂直堆疊，圖片變小) */
-            .feature-row, .feature-row:nth-child(even) { flex-direction: column; gap: 20px; margin-bottom: 60px; }
+            .feature-row, .feature-row:nth-child(even), .challenge-grid { flex-direction: column; gap: 30px; margin-bottom: 60px; }
             .feature-img { height: 220px; width: 100%; border-radius: 12px; }
             .feature-text h3 { font-size: 24px; }
-            .feature-text p { font-size: 16px; }
+            .feature-text p, .challenge-text p { font-size: 16px; }
             .highlight-data { font-size: 16px; padding: 12px 15px; }
-
-            /* 場館圖集 (改為單欄) */
+            .challenge-text h3 { font-size: 26px; }
             .gallery-grid { grid-template-columns: 1fr; gap: 15px; }
             .gallery-item { height: 200px; }
-
-            /* 方案卡片 */
             .plans-container { grid-template-columns: 1fr; gap: 30px; }
             .plan-card { padding: 30px 20px; }
             .plan-card h3 { font-size: 28px; }
             .plan-badge { right: 20px; font-size: 12px; }
-
-            /* 保證回饋 (改為直式堆疊卡片) */
             .tier-row { flex-direction: column; border-radius: 12px; }
             .tier-scale, .tier-invest { width: 100%; border-right: none; border-bottom: 1px solid #333; text-align: center; justify-content: center; padding: 15px; }
             .tier-scale { font-size: 18px; }
@@ -203,31 +202,21 @@
             .tier-invest span { margin-bottom: 0; }
             .tier-reward { padding: 20px; justify-content: center; text-align: center; flex-direction: column; gap: 10px; }
             .tier-reward i { margin-right: 0; font-size: 32px; }
-
-            /* 據點優勢 */
             .loc-flex { flex-direction: column; gap: 30px; }
             .loc-text h2 { font-size: 28px; text-align: center; }
             .loc-text p { font-size: 16px; text-align: center; }
             .loc-features li { font-size: 16px; }
-
-            /* 合作流程 */
             .process-grid { grid-template-columns: 1fr; gap: 40px; }
             .process-grid::before { display: none; }
             .step-icon { width: 60px; height: 60px; font-size: 24px; margin-bottom: 15px; }
             .process-step h4 { font-size: 18px; }
-
-            /* FAQ */
             .faq-grid { flex-direction: column; gap: 15px; }
             .faq-btn { font-size: 15px; padding: 15px; }
             .faq-content p { font-size: 14px; padding: 0 15px 15px 15px; }
-
-            /* 表單 */
             .contact-section { padding: 60px 0; }
             .form-container { padding: 25px 15px; }
             .form-row { flex-direction: column; gap: 20px; }
             .submit-btn { font-size: 16px; }
-
-            /* 頁尾 */
             .footer-grid { flex-direction: column; text-align: center; gap: 30px; }
             .footer-col { flex: 1 !important; }
         }
@@ -313,6 +302,48 @@
         </div>
     </section>
 
+    <section class="challenge-section" id="challenge">
+        <div class="container">
+            <h2 class="section-title" style="color: white; margin-bottom: 20px;">付費特約獨家亮點 <br><span>企業專屬健康挑戰賽</span></h2>
+            <div class="section-subtitle" style="color: #ddd;">不只是健身，更是一場點燃全公司熱情的團隊活動！我們為您從零到有一手包辦。</div>
+            
+            <div class="challenge-grid">
+                <div class="challenge-img">
+                    <div class="challenge-badge">HR 零煩惱專案</div>
+                    <img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=2069&auto=format&fit=crop" alt="健康挑戰賽團隊">
+                </div>
+                <div class="challenge-text">
+                    <h3>凝聚向心力，<br><span>玩出職場好體力！</span></h3>
+                    <p style="color: var(--text-muted); font-size: 18px;">許多企業推動健康福利最怕「員工不參與」。World Gym 擁有豐富的企業賽事協辦經驗，透過遊戲化機制，讓跨部門員工在歡笑與汗水中建立革命情感！</p>
+                    
+                    <ul class="challenge-list">
+                        <li>
+                            <div class="icon-box"><i class="fa-solid fa-clipboard-check"></i></div>
+                            <div>
+                                <h4>專人企劃，HR 零負擔</h4>
+                                <p>由專屬顧問為您的企業量身設計賽制（如：減脂賽、增肌賽、打卡全勤賽），從前置宣傳到賽事追蹤，為人資省下大量行政時間。</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon-box"><i class="fa-solid fa-dna"></i></div>
+                            <div>
+                                <h4>InBody 數據，科學見證</h4>
+                                <p>賽事起訖皆採用高階 InBody 測量，數據化呈現「體脂下降率」或「肌肉增加量」，確保競賽公平且具體展現健康成效。</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon-box"><i class="fa-solid fa-gift"></i></div>
+                            <div>
+                                <h4>結合高價值回饋作獎品</h4>
+                                <p>付費特約贈送的「免費會籍與教練課」，可直接作為挑戰賽的冠軍大獎，企業無須再額外編列高額獎品預算！</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="plans" class="benefits-bg">
         <div class="container">
             <h2 class="section-title">選擇最適合您的<span>特約方案</span></h2>
@@ -342,7 +373,7 @@
                         <li><i class="fa-solid fa-dumbbell"></i> <div>專屬教練課優惠：單堂 $1,488 元<br><span style="font-size: 14px; color: var(--text-muted);">(最多購買 12 堂，每人限購一組，限 WG 具籍會員購買)</span></div></li>
                         <li><i class="fa-solid fa-gift"></i> <div>贈送 World Gym 零售商品折價券 & 餐飲折抵券</div></li>
                         <li><i class="fa-solid fa-trophy"></i> <div>協辦企業專屬「健康挑戰賽」<br><span class="highlight">*現有會員員工亦可報名同樂</span></div></li>
-                        <li><i class="fa-solid fa-star" style="color: #FFD700;"></i> <div>企業尊榮加碼禮：依員工規模與投資金額，額外獲贈多組「免費會籍 + 教練課」</div></li>
+                        <li><i class="fa-solid fa-star" style="color: var(--gold);"></i> <div>企業尊榮加碼禮：依員工規模與投資金額，額外獲贈多組「免費會籍 + 教練課」</div></li>
                     </ul>
                     <div class="plan-btn-wrapper">
                         <a href="#contactForm" class="btn-primary">預約專屬顧問諮詢</a>
@@ -377,7 +408,7 @@
                 <div class="tier-row" style="border-color: #A1000B;">
                     <div class="tier-scale" style="background-color: #3d0004;">501 人以上</div>
                     <div class="tier-invest"><span>企業投資金額</span><strong>$120,000</strong></div>
-                    <div class="tier-reward"><i class="fa-solid fa-crown" style="color: #FFD700;"></i><div>保證回饋：<span style="color: white; font-weight: 900;">一年會籍 + 1堂教練課</span><br>（共 5 組）</div></div>
+                    <div class="tier-reward"><i class="fa-solid fa-crown" style="color: var(--gold);"></i><div>保證回饋：<span style="color: white; font-weight: 900;">一年會籍 + 1堂教練課</span><br>（共 5 組）</div></div>
                 </div>
             </div>
         </div>
@@ -494,7 +525,7 @@
                         <div class="form-group">
                             <label>企業預估規模 *</label>
                             <select required>
-                                <option value="" disabled selected>請選擇員工人數</option>
+                                <option value="" disabled selected>請選擇員ூழ人數</option>
                                 <option value="1-50">1 - 50 人</option>
                                 <option value="51-100">51 - 100 人</option>
                                 <option value="101-500">101 - 500 人</option>
